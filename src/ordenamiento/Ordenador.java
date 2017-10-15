@@ -77,11 +77,13 @@ public class Ordenador <T extends Comparable<T>>{
      * @param list lista de que contiene clase generica
      */
     public void mergeSort(List<T> list){
+        contar.resetear();
         mergeSort(0, list.size() - 1, list, new ArrayList<> (list));
     }
     
     private void mergeSort(int menor, int mayor, List<T> list, List<T> aux) {
         if(menor < mayor){
+            contar.contar(2); // condicion , operaciones
             int mid = menor + (mayor - menor) / 2;
             mergeSort(menor, mid, list, aux); 
             mergeSort(mid+1, mayor, list, aux);
@@ -90,7 +92,7 @@ public class Ordenador <T extends Comparable<T>>{
     }
 
     private void merge(int menor, int mitad, int mayor, List<T> list, List<T> aux) {
-        contar.resetear();
+        
         int left = menor;
 	int right = mitad + 1;
         

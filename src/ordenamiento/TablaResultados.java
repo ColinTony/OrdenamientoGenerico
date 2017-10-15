@@ -5,7 +5,6 @@ import java.util.List;
 /**
  *
  * @author colin
- * @param <T> Tipo generica para mostrar tabla
  */ 
 public class TablaResultados{
     public void mostrarTabla(List<Marcador> lista){

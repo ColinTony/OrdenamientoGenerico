@@ -45,7 +45,7 @@ public class Marcador implements Comparable<Marcador>{
      * Posibles colores tipo enum
      */
     public enum Color{
-        Amarillo , Rojo , Azul;
+        Amarillo , Azul , Rojo;
     }
     // getters y setters de atributos
     public Color getColor() {
@@ -110,17 +110,40 @@ public class Marcador implements Comparable<Marcador>{
     
     public int compareTapa(Marcador marcador){
         if(marcador.isTapa() && !this.isTapa()){
-            return -1;
+            return 1;
         }else{
             if(this.isTapa() && !marcador.isTapa()){
-                return 1;
+                return -1;
             }else{
                 return 0;
             }
         }
     }
+    // Este compareTo , compara Si son amarillo con tapa van primero y se ordenaran
+    // por tamaño del grosor ... Se seguiran con los azules con tapa y se ordenan de
+    // igual forma por el grosor  , al final seran los maracadores rojos , poniendo
+    // primero si son rojos con tapa y al mismo tiempo ordenados por grosor
     @Override
     public int compareTo(Marcador marcador) {
-        return this.color.compareTo(marcador.getColor());
+        int rptGrosor = comparacionGrosor(marcador);
+        int rptTapa = compareTapa(marcador);
+        int rptColor = compareColor(marcador);
+        if(rptColor != 0){
+            return rptColor;
+        }else{
+            if(rptTapa !=0){
+                return rptTapa;
+            }else{
+                if(rptGrosor != 0){
+                    return rptGrosor;
+                }else{
+                    if(rptTapa !=0){
+                        return rptTapa;
+                    }else{
+                        return 0;
+                    }
+                }
+            }
+        }
     }
 }
