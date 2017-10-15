@@ -31,7 +31,7 @@ public class Ordenamiento {
         }
                 
         System.out.println("**************Lista de marcadores ordenados*************");
-        ordena.burbuja2(listMarc);
+        ordena.quickSort(listMarc,0,listMarc.length-1);
         for (Marcador marc : listMarc){
             System.out.println("Marcador. Tapa : "+ marc.isTapa()+ 
                     " Grosor : "+ marc.getGrosor()+
