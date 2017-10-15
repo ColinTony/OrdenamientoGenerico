@@ -28,7 +28,7 @@ public class Ordenamiento {
         System.out.println("**************Lista de marcadores no ordenados*************");
         resultados.mostrarTabla(listaMarcadores);
         System.out.println("**************Lista de marcadores ordenados*************");
-        ordena.sort(listaMarcadores);
+        ordena.mergeSort(listaMarcadores);
         resultados.mostrarTabla(listaMarcadores);
         
     }

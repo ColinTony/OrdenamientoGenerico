@@ -15,13 +15,13 @@ public class Ordenador <T extends Comparable<T>>{
      *
      * @param <T> Clase tipo generica
      * @param arr Array que debera ordenarse
-     * @param a Variable para reccorer de izquierda a derecha
-     * @param b Variable para recorrer de derecha a irzquierda
+     * @param izq Variable para reccorer de izquierda a derecha
+     * @param der Variable para recorrer de derecha a irzquierda
      */
-    public <T extends Comparable<? super T>> void quickSort(List<T> arr, int a, int b) {
+    public <T extends Comparable<? super T>> void quickSort(List<T> arr, int izq, int der) {
         
-        if (a < b) { // mientras no se crucen
-            int i = a, j = b;
+        if (izq < der) { // mientras no se crucen
+            int i = izq, j = der;
             T x = arr.get((i+j)/2); // Obtenemos el pivote
 
             do {
@@ -38,11 +38,12 @@ public class Ordenador <T extends Comparable<T>>{
 
             } while (i <= j); // lo seguiremos haceinedo mientras nos se crucen
             
-// recursividad
-            quickSort(arr, a, j); 
-            quickSort(arr, i, b);
+            // recursividad
+            quickSort(arr, izq, j); 
+            quickSort(arr, i, der);
         }
     }
+    
     /**
      * Modificacion para el usar el algoritmo con tipo genericos
      * Espero que funciones xD
@@ -71,32 +72,39 @@ public class Ordenador <T extends Comparable<T>>{
         System.out.println("El contador de ordenamiento burbuja es : "+ contar.getCuenta());
     }
     
-    public void sort(List<T> values){
-        mergeSort(0, values.size() - 1, values, new ArrayList<T>(values));
+    /**
+     *
+     * @param list lista de que contiene clase generica
+     */
+    public void mergeSort(List<T> list){
+        mergeSort(0, list.size() - 1, list, new ArrayList<> (list));
     }
-    private void mergeSort(int low, int high, List<T> values, List<T> aux) {
-        if(low < high){
-            int mid = low + (high - low) / 2;
-            mergeSort(low, mid, values, aux); 
-            mergeSort(mid+1, high, values, aux);
-            merge(low, mid, high, values, aux);
+    
+    private void mergeSort(int menor, int mayor, List<T> list, List<T> aux) {
+        if(menor < mayor){
+            int mid = menor + (mayor - menor) / 2;
+            mergeSort(menor, mid, list, aux); 
+            mergeSort(mid+1, mayor, list, aux);
+            merge(menor, mid, mayor, list, aux);
 	}
     }
 
-    private void merge(int low, int mid, int high, List<T> values, List<T> aux) {
-        int left = low;
-	int right = mid + 1;
+    private void merge(int menor, int mitad, int mayor, List<T> list, List<T> aux) {
+        contar.resetear();
+        int left = menor;
+	int right = mitad + 1;
         
-        for(int i = low; i <= high; i++){
-            aux.set(i, values.get(i));
+        for(int i = menor; i <= mayor; i++){
+            aux.set(i, list.get(i));
 	}
-        while(left <= mid && right <= high){
-            values.set(low++, aux.get(left).compareTo(aux.get(right)) < 0 ? aux.get(left++) : aux.get(right++));
+        while(left <= mitad && right <= mayor){ // mientras sean mnores que la mitad
+            contar.contar(); // se contara las veces que se pregunta la condicion
+            list.set(menor++, aux.get(left).compareTo(aux.get(right)) < 0 
+                    ? aux.get(left++) : aux.get(right++));
 	}
-
-		while(left <= mid){
-			values.set(low++, aux.get(left++));
-		}
+        while(left <= mitad){
+            list.set(menor++, aux.get(left++));
 	}
+    }
     
 }
