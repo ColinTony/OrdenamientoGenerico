@@ -92,10 +92,35 @@ public class Marcador implements Comparable<Marcador>{
         this.tapa = tapa;
     }
     
+    public int comparacionGrosor(Marcador marcador){
+        float aux = this.grosor - marcador.getGrosor();
+        if(aux > 0){
+            return 1;
+        }else{
+            if(aux < 0){
+             return -1;   
+            }else{
+                return 0;
+            }
+        }
+    }
+    public int compareColor(Marcador marcador){
+        return this.color.compareTo(marcador.getColor());
+    }
     
+    public int compareTapa(Marcador marcador){
+        if(marcador.isTapa() && !this.isTapa()){
+            return -1;
+        }else{
+            if(this.isTapa() && !marcador.isTapa()){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
     @Override
     public int compareTo(Marcador marcador) {
         return this.color.compareTo(marcador.getColor());
     }
-    
 }
